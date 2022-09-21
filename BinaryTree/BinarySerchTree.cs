@@ -8,13 +8,12 @@ namespace BinaryTree
 {
     internal class BinarySerchTree<T> where T : IComparable
     {
-        ///Variables
+        //Variables
         int count = 0;
         bool result = false;
         Node<T> Root;
         Node<T> Current;
-       
-        ///UC-1
+        //UC-1 
         public void InsertData(T data)
         {
             if (Root == null)
@@ -24,7 +23,6 @@ namespace BinaryTree
                 count++;
                 return;
             }
-            
             if (this.Current.data.CompareTo(data) > 0)
             {
                 if (this.Current.leftNode == null)
@@ -57,6 +55,32 @@ namespace BinaryTree
         public Node<T> GetRoot()
         {
             return this.Root;
+        }
+        //UC-2 - Gets the Size of Binary Search Tree
+        public int GetSize()
+        {
+            return count;
+        }
+        //UC-3 - Search Element in Binary Search Tree
+        public bool SearchTree(int data, Node<T> node)
+        {
+            if (node == null)
+            {
+                return false;
+            }
+            else
+            {
+                if (this.Current.data.Equals(data))
+                {
+                    result = true;
+                }
+                else if (this.Current.data.CompareTo(data) > 0)
+                {
+                    this.Current = this.Current.leftNode;
+                    SearchTree(data, Current);
+                }
+                return result;
+            }
         }
         public void Display(Node<T> node)
         {
